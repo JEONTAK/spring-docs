@@ -1,0 +1,29 @@
+spring:
+  application:
+    name: S3Upload
+  servlet:
+    multipart:
+      enabled: true # 멀티파트 업로드 지원여부 (default: true)
+      max-file-size: 1GB # 한개 파일의 최대 사이즈 (default: 1MB)
+# monitoring
+management:
+  endpoints:
+    web:
+      exposure:
+        include: health, prometheus
+server:
+  tomcat:
+    mbeanregistry:
+      enabled: true
+
+cloud:
+  aws:
+    credentials:
+      access-key: ${AWS_S3_ACCESS_KEY}
+      secret-key: ${AWS_S3_SECRET_KEY}
+    s3:
+      bucket: ${AWS_S3_IMAGE_BUCKET}
+    region:
+      static: ${AWS_REGION}
+    stack:
+      auto: false
