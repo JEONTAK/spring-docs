@@ -1,10 +1,14 @@
 spring:
   application:
     name: S3Upload
+
   servlet:
     multipart:
       enabled: true # 멀티파트 업로드 지원여부 (default: true)
-      max-file-size: 1GB # 한개 파일의 최대 사이즈 (default: 1MB)
+      # file-size-threshold: 2GB
+      max-file-size: 2GB # 한개 파일의 최대 사이즈 (default: 1MB)
+      max-request-size: 2GB # 한개 요청의 최대 사이즈 (default: 10MB)
+
 # monitoring
 management:
   endpoints:

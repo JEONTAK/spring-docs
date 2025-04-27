@@ -13,6 +13,7 @@ import software.amazon.awssdk.services.s3.S3Client;
 import software.amazon.awssdk.services.s3.model.*;
 import software.amazon.awssdk.services.s3.presigner.model.PutObjectPresignRequest;
 
+import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.nio.ByteBuffer;
@@ -59,45 +60,22 @@ public class S3UploadService {
                 .contentLength(file.getSize())
                 .build();
 
+        s3Client.putObject(putObjectRequest, RequestBody.fromInputStream(file.getInputStream(), file.getSize()));
+
+        /*byte[] fileBytes = file.getBytes();
+
+        PutObjectRequest putObjectRequest = PutObjectRequest.builder()
+                .bucket(bucketName)
+                .key(file.getOriginalFilename())
+                .contentType(file.getContentType())
+                .contentLength(file.getSize())
+                .build();
+
         s3Client.putObject(putObjectRequest, RequestBody.fromInputStream(
-                file.getInputStream(), file.getSize()));
+                new ByteArrayInputStream(fileBytes), fileBytes.length));*/
+
         double endTime = System.currentTimeMillis();
         return (endTime - startTime) / 1000;
-        /*CreateMultipartUploadRequest createRequest = CreateMultipartUploadRequest.builder()
-                .bucket(bucketName)
-                .key(file.getOriginalFilename())
-                .build();
-        CreateMultipartUploadResponse createResponse = s3Client.createMultipartUpload(createRequest);
-
-        List<CompletedPart> parts = new ArrayList<>();
-        int partNumber = 1;
-        long chunkSize = 5 * 1024 * 1024; // 5MB chunks
-        try (InputStream inputStream = file.getInputStream()) {
-            byte[] buffer = new byte[(int) chunkSize];
-            int bytesRead;
-            while ((bytesRead = inputStream.read(buffer)) > 0) {
-                ByteBuffer byteBuffer = ByteBuffer.wrap(buffer, 0, bytesRead);
-                UploadPartRequest partRequest = UploadPartRequest.builder()
-                        .bucket(bucketName)
-                        .key(file.getOriginalFilename())
-                        .uploadId(createResponse.uploadId())
-                        .partNumber(partNumber)
-                        .build();
-                UploadPartResponse partResponse = s3Client.uploadPart(partRequest, RequestBody.fromByteBuffer(byteBuffer));
-                parts.add(CompletedPart.builder()
-                        .partNumber(partNumber)
-                        .eTag(partResponse.eTag())
-                        .build());
-                partNumber++;
-            }
-        }
-
-        s3Client.completeMultipartUpload(CompleteMultipartUploadRequest.builder()
-                .bucket(bucketName)
-                .key(file.getOriginalFilename())
-                .uploadId(createResponse.uploadId())
-                .multipartUpload(CompletedMultipartUpload.builder().parts(parts).build())
-                .build());*/
     }
 
     // 3. PreSigned URL 생성
@@ -116,7 +94,4 @@ public class S3UploadService {
         return (endTime - startTime) / 1000;
     }
 
-    private String getPublicUrl(String fileName) {
-        return String.format("https://%s.s3.%s.amazonaws.com/%s", bucketName, region, fileName);
-    }
 }
