@@ -28,9 +28,6 @@ dependencies {
     // Spring Web
     implementation 'org.springframework.boot:spring-boot-starter-web'
 
-    // Spring Batch
-    implementation 'org.springframework.boot:spring-boot-starter-batch'
-
     // Spring Data JDBC
     implementation 'org.springframework.boot:spring-boot-starter-data-jdbc'
 

@@ -36,8 +36,8 @@ public class InsertController {
 
     @Operation(summary = "Simple JDBC Insert 사용", description = "Simple JDBC Insert API입니다")
     @PostMapping("/simplejdbc")
-    public ResponseEntity<InsertResponse> simpleJdbcInsertBatch(@RequestBody InsertRequest insertRequest) throws Exception {
-        return ResponseEntity.ok(insertService.simpleJdbcInsertBatch(insertRequest.getAmount()));
+    public ResponseEntity<InsertResponse> savUsingSimpleJdbcInsert(@RequestBody InsertRequest insertRequest) {
+        return ResponseEntity.ok(insertService.saveUsingSimpleJdbcInsert(insertRequest.getAmount()));
     }
 
     @Operation(summary = "Spring Data JDBC 사용", description = "Spring Data JDBC 사용 API입니다")

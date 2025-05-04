@@ -1,5 +1,6 @@
 package com.example.db_insert.entity;
 
+
 import jakarta.persistence.*;
 import lombok.AccessLevel;
 import lombok.Getter;

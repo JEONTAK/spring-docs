@@ -7,7 +7,6 @@ import com.example.db_insert.repository.JdbcRepository;
 import com.example.db_insert.repository.SpringJdbcRepository;
 import lombok.RequiredArgsConstructor;
 
-import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -25,6 +24,7 @@ public class InsertService {
     private final JdbcRepository jdbcRepository;
     private final SpringJdbcRepository springJdbcRepository;
 
+    //Spring Data JPA 사용
     public InsertResponse saveUsingSpringDataJPA(Integer amount) {
         double startTime = System.currentTimeMillis();
         List<User> users = IntStream.range(0, amount).mapToObj(i -> "example" + LocalDateTime.now().getNano()).map(User::create).toList();
@@ -33,6 +33,7 @@ public class InsertService {
         return InsertResponse.of(amount, ((endTime - startTime) / 1000) + "초");
     }
 
+    //JdbcTemplate Bulk Insert 사용
     public InsertResponse saveUsingJDBC(Integer amount) {
         double startTime = System.currentTimeMillis();
         List<User> users = IntStream.range(0, amount).mapToObj(i -> "example" + LocalDateTime.now().getNano()).map(User::create).toList();
@@ -41,7 +42,8 @@ public class InsertService {
         return InsertResponse.of(amount, ((endTime - startTime) / 1000) + "초");
     }
 
-    public InsertResponse simpleJdbcInsertBatch(Integer amount) {
+    //SimpleJdbcInsert 사용
+    public InsertResponse saveUsingSimpleJdbcInsert(Integer amount) {
         double startTime = System.currentTimeMillis();
         List<User> users = IntStream.range(0, amount).mapToObj(i -> "example" + LocalDateTime.now().getNano()).map(User::create).toList();
         jdbcRepository.saveUsingSimpleJDBC(users);
@@ -49,6 +51,7 @@ public class InsertService {
         return InsertResponse.of(amount, ((endTime - startTime) / 1000) + "초");
     }
 
+    //Spring Data JDBC 사용
     public InsertResponse saveUsingSpringDataJDBC(Integer amount) {
         double startTime = System.currentTimeMillis();
         List<User> users = IntStream.range(0, amount).mapToObj(i -> "example" + LocalDateTime.now().getNano()).map(User::create).toList();

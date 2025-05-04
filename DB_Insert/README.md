@@ -4,15 +4,16 @@
 ### 비교 내용
 1. JPA를 통한 단순 Insert를 사용하는 방법
 2. JDBC Bulk Insert를 사용하는 방법
-3. Spring Batch를 사용하는 방법
+3. SimpleJdbcInsert를 사용하는 방법
 4. Spring Data JDBC를 사용하는 방법
 
 필요한 의존성
+- Spring Data Web
 - Spring Data JPA
 - Spring Data JDBC
-- Spring Batch
 - MySQL
 - Lombok
+- Swagger
 
 application.yml
 
@@ -23,7 +24,6 @@ spring:
 
   datasource:
     url: jdbc:mysql://localhost:3306/db-insert-mysql?rewriteBatchedStatements=true
-    rewriteBatchedStatements=true = (MySQL JDBC 드라이버가 배치 삽입 쿼리를 단일 쿼리로 재작성하여 DB로 전송하도록 지시)
     username: test
     password: test
     driver-class-name: com.mysql.cj.jdbc.Driver
@@ -31,23 +31,27 @@ spring:
   jpa:
     hibernate:
       ddl-auto: create
-    show-sql: true
+    show-sql: false
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
+        jdbc:
+          batch_size: 1000
 ```
+
 Local 실행 조건
 
+```
 docker 설치
+```
 
 실행 방법
+```
 1. 터미널에서 docker-compose up을 통하여 db 컨테이너 실행
 2. Application 실행
 3. Swagger를 통하여 데이터 넣을 양을 정하고 데이터 생성
 4. 처리 속도 비교
+```
 
-중복 검증이 필요한 대량 데이터 삽입의 경우는 해당 방법은 효과가 없음.
--> 하나씩 검증하고 삽입해야하기 때문.
-
-따라서 검증이 필요하지 않은 대량 데이터 생성에 적합
+### 자세한 내용은 [블로그](https://velog.io/@tak980418/Spring-BulkInsert%EB%A5%BC-%ED%86%B5%ED%95%9C-%EC%84%B1%EB%8A%A5-%EC%B5%9C%EC%A0%81%ED%99%94)에서 확인하실 수 있습니다.
