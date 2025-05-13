@@ -1,0 +1,38 @@
+spring:
+  application:
+    name: DB_Search
+  #MySQL
+  datasource:
+    url: jdbc:mysql://localhost:3306/db-search-mysql?rewriteBatchedStatements=true
+    username: test
+    password: test
+    driver-class-name: com.mysql.cj.jdbc.Driver
+
+  #JPA
+  jpa:
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true
+  #Cache
+  cache:
+    type: redis
+    cache-names:
+      - redis-users
+      - caffeine-users
+
+
+  #Async
+  task:
+    execution:
+      pool:
+        max-size: 10
+        core-size: 5
+
+  #Redis
+  data:
+    redis:
+      host: db-search-redis
+      port: 6379
