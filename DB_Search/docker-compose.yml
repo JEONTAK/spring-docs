@@ -4,7 +4,7 @@ services:
     container_name: db-search-mysql
     environment:
       - "MYSQL_RANDOM_ROOT_PASSWORD=1111"
-      - "MYSQL_DATABASE=db-insert-mysql"
+      - "MYSQL_DATABASE=db-search-mysql"
       - "MYSQL_USER=test"
       - "MYSQL_PASSWORD=test"
     ports:
