@@ -33,9 +33,9 @@ public class UserCommandService {
         List<User> users = new ArrayList<>();
         for (int i = 0; i < Const.TOTAL_RECORDS; i++) {
             String email = "user_" + UUID.randomUUID().toString().substring(0, 8) + "@example.com";
-            String name = "Name_" + UUID.randomUUID().toString().substring(0, 8);
+            String name = "Name_" + ThreadLocalRandom.current().nextInt(1000);
             int age = 18 + ThreadLocalRandom.current().nextInt(82);
-            users.add(User.create(email, name, age));
+            users.add(User.create(email, email, name, age));
 
             if (users.size() >= Const.BATCH_SIZE) {
                 userJdbcRepository.saveAll(users);

@@ -11,12 +11,19 @@ spring:
   #JPA
   jpa:
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
     properties:
       hibernate:
         dialect: org.hibernate.dialect.MySQLDialect
         format_sql: true
+
+  #Redis
+  data:
+    redis:
+      host: localhost
+      port: 6379
+
   #Cache
   cache:
     type: redis
@@ -31,8 +38,3 @@ spring:
         max-size: 10
         core-size: 5
 
-  #Redis
-  data:
-    redis:
-      host: db-search-redis
-      port: 6379

@@ -36,6 +36,12 @@ dependencies {
     // Spring Data Redis
     implementation 'org.springframework.boot:spring-boot-starter-data-redis'
 
+    // redis
+    implementation 'org.springframework.boot:spring-boot-starter-cache'
+
+    // redisson
+    implementation 'org.redisson:redisson-spring-boot-starter:3.37.0'
+
     // Caffeine Cache
     implementation 'com.github.ben-manes.caffeine:caffeine:3.1.8'
 
@@ -48,6 +54,9 @@ dependencies {
 
     // Swagger
     implementation 'org.springdoc:springdoc-openapi-starter-webmvc-ui:2.8.6'
+
+    // Jackson DataType
+    implementation 'com.fasterxml.jackson.datatype:jackson-datatype-jsr310'
 
     // Test
     testImplementation 'org.springframework.boot:spring-boot-starter-test'
