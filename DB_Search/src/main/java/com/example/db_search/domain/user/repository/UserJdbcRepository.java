@@ -19,16 +19,17 @@ public class UserJdbcRepository {
 
     public void saveAll(List<User> users) {
         String sql = """
-                INSERT INTO users(email, name, age, created_at, modified_at)
-                VALUES (?, ?, ?, ?, ?)
+                INSERT INTO users(email, indexing_email, name, age, created_at, modified_at)
+                VALUES (?, ?, ?, ?, ?, ?)
                 """;
 
         jdbcTemplate.batchUpdate(sql, users, Const.BATCH_SIZE, (PreparedStatement ps, User user) -> {
             ps.setString(1, user.getEmail());
-            ps.setString(2, user.getName());
-            ps.setInt(3, user.getAge());
-            ps.setTimestamp(4, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setString(2, user.getIndexingEmail());
+            ps.setString(3, user.getName());
+            ps.setInt(4, user.getAge());
             ps.setTimestamp(5, Timestamp.valueOf(LocalDateTime.now()));
+            ps.setTimestamp(6, Timestamp.valueOf(LocalDateTime.now()));
         });
     }
 }

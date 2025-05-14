@@ -6,7 +6,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "users")
+@Table(name = "users", indexes = @Index(name = "idx_email", columnList = "indexingEmail"))
 @Getter
 @NoArgsConstructor
 public class User extends BaseEntity {
@@ -19,18 +19,22 @@ public class User extends BaseEntity {
     private String email;
 
     @Column(nullable = false)
+    private String indexingEmail;
+
+    @Column(nullable = false)
     private String name;
 
     @Column(nullable = false)
     private Integer age;
 
-    private User(String email, String name, Integer age) {
+    private User(String email, String indexingEmail, String name, Integer age) {
         this.email = email;
+        this.indexingEmail = indexingEmail;
         this.name = name;
         this.age = age;
     }
 
-    public static User create(String email, String name, Integer age) {
-        return new User(email, name, age);
+    public static User create(String email, String indexingEmail, String name, Integer age) {
+        return new User(email, indexingEmail, name, age);
     }
 }
