@@ -1,4 +1,4 @@
-package com.example.concurrent.domain.usercoupon.entity;
+package com.example.concurrent.domain.usercoupon.common.entity;
 
 import com.example.concurrent.common.entity.BaseEntity;
 import com.example.concurrent.domain.coupon.entity.Coupon;

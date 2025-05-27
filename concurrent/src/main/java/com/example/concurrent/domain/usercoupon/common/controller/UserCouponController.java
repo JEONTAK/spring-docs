@@ -1,7 +1,7 @@
-package com.example.concurrent.domain.usercoupon.controller;
+package com.example.concurrent.domain.usercoupon.common.controller;
 
+import com.example.concurrent.domain.usercoupon.common.service.UserCouponService;
 import com.example.concurrent.domain.usercoupon.dto.request.UserCouponIssueRequest;
-import com.example.concurrent.domain.usercoupon.service.UserCouponService;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;

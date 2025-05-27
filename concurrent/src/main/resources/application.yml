@@ -7,6 +7,9 @@ spring:
     username: test
     password: test
     driver-class-name: com.mysql.cj.jdbc.Driver
+    hikari:
+      maximum-pool-size: 50
+      minimum-idle: 10
 
   # JPA
   jpa:
@@ -23,14 +26,3 @@ spring:
     redis:
       host: localhost
       port: 6379
-
-# Monitoring
-management:
-  endpoints:
-    web:
-      exposure:
-        include: health, prometheus
-server:
-  tomcat:
-    mbeanregistry:
-      enabled: true

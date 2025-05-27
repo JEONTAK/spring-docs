@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "usercouponpess")
+@Table(name = "usercoupons_pes")
 @Getter
 @NoArgsConstructor
 public class UserCouponPes extends BaseEntity {

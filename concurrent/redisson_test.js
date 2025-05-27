@@ -8,8 +8,10 @@ export const options = {
             executor: 'ramping-vus',
             startVUs: 0,
             stages: [
-                { duration: '30s', target: 100 },
-                { duration: '1m', target: 200 },
+                { duration: '30s', target: 200 },
+                { duration: '30s', target: 400 },
+                { duration: '30s', target: 600 },
+                { duration: '30s', target: 800 },
                 { duration: '30s', target: 0 },
             ],
             gracefulRampDown: '30s',
@@ -34,6 +36,9 @@ export default function () {
     const res = http.post(url, payload, params);
     check(res, {
         'is status 200': (r) => r.status === 200,
+        'is status 400': (r) => r.status === 400,
+        'is status 429': (r) => r.status === 429,
+        'is status 500': (r) => r.status === 500,
     });
     sleep(0.1);
 }

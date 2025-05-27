@@ -8,7 +8,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 @Entity
-@Table(name = "usercouponopts")
+@Table(name = "usercoupons_opt")
 @Getter
 @NoArgsConstructor
 public class UserCouponOpt extends BaseEntity {

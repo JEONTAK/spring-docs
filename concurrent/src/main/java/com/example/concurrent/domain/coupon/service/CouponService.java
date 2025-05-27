@@ -2,7 +2,7 @@ package com.example.concurrent.domain.coupon.service;
 
 import com.example.concurrent.common.exception.CustomException;
 import com.example.concurrent.domain.coupon.dto.response.CouponCreateResponse;
-import com.example.concurrent.domain.usercoupon.service.UserCouponService;
+import com.example.concurrent.domain.usercoupon.common.service.UserCouponService;
 import com.example.concurrent.domain.coupon.entity.Coupon;
 import com.example.concurrent.domain.coupon.repository.CouponRepository;
 import lombok.RequiredArgsConstructor;

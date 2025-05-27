@@ -5,6 +5,7 @@ import com.example.concurrent.domain.coupon.entity.Coupon;
 import com.example.concurrent.domain.coupon.repository.CouponRepository;
 import com.example.concurrent.domain.user.entity.User;
 import com.example.concurrent.domain.user.repository.UserRepository;
+import com.example.concurrent.domain.usercoupon.pessimisticlock.entity.UserCouponPes;
 import com.example.concurrent.domain.usercoupon.pessimisticlock.repository.UserCouponPesRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
@@ -35,9 +36,8 @@ public class UserCouponPesService {
         }
 
         //쿠폰 발급
-        coupon.updateIssuedAmount(coupon.getIssuedAmount() + 1);
-        couponRepository.save(coupon);
-        userCouponPesRepository.save(com.example.concurrent.domain.usercoupon.entity.UserCoupon.create(coupon, user));
+        couponRepository.incrementIssuedAmount(couponId);
+        userCouponPesRepository.save(UserCouponPes.create(coupon, user));
     }
 
 }

@@ -38,7 +38,4 @@ public class Coupon extends BaseEntity {
         return new Coupon(couponName, discountPrice, totalAmount, issuedAmount);
     }
 
-    public void updateIssuedAmount(int issuedAmount) {
-        this.issuedAmount = issuedAmount;
-    }
 }
